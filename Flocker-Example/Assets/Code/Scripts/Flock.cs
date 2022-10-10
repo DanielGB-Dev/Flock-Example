@@ -38,12 +38,6 @@ public class Flock : MonoBehaviour
             evade = false;
         }
         Debug.DrawRay(transform.position, forward, evade ? Color.red : Color.green);
-        /*
-        if (tag == "Obstacle")
-        {
-            Debug.Log(hitData.transform.gameObject);
-        }
-        */
         
     }
     void FixedUpdate()

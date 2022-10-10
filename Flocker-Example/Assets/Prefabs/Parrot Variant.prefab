@@ -106,18 +106,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 0f6c9c31111cf3e4286380c65d99e5ae, type: 3}
   m_PrefabInstance: {fileID: 8673284997681893276}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1592203312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8402831872949809869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540278c194eece84096bab974bfc3d43, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &-3065141793809431560
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -134,3 +122,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1592203312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8402831872949809869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 540278c194eece84096bab974bfc3d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rangeOfVision: 10
