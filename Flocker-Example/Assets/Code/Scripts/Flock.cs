@@ -9,7 +9,10 @@ public class Flock : MonoBehaviour
     private new Rigidbody rigidbody;
 
     private Vector3 randomize;
+    private RaycastHit hitData;
+    public float rangeOfVision;
 
+    private bool evade;
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -17,27 +20,52 @@ public class Flock : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(controller.target);
+        if (!evade)
+        {
+            transform.LookAt(controller.target);
+        }
+        
 
         Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-        Debug.DrawRay(transform.position, forward, Color.green);
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hitData;
+        if (Physics.Raycast(ray, out hitData, rangeOfVision))
+        {
+            evade = true;
+        }
+        else
+        {
+            evade = false;
+        }
+        Debug.DrawRay(transform.position, forward, evade ? Color.red : Color.green);
+        /*
+        if (tag == "Obstacle")
+        {
+            Debug.Log(hitData.transform.gameObject);
+        }
+        */
+        
     }
     void FixedUpdate()
     {
         if (controller)
         {
-            Vector3 relativePos = Steer() * Time.deltaTime;
+            if (!evade)
+            {
+                Vector3 relativePos = Steer() * Time.deltaTime;
 
-            if(relativePos != Vector3.zero)
-                rigidbody.velocity = relativePos;
+                if(relativePos != Vector3.zero)
+                    rigidbody.velocity = relativePos;
 
-            float speed = rigidbody.velocity.magnitude;
+                float speed = rigidbody.velocity.magnitude;
 
-            if (speed > controller.maxVelocity)
-                rigidbody.velocity = rigidbody.velocity.normalized * controller.maxVelocity;
-                
-            else if (speed < controller.minVelocity) 
-                rigidbody.velocity = rigidbody.velocity.normalized * controller.minVelocity;
+                if (speed > controller.maxVelocity)
+                    rigidbody.velocity = rigidbody.velocity.normalized * controller.maxVelocity;
+                    
+                else if (speed < controller.minVelocity) 
+                    rigidbody.velocity = rigidbody.velocity.normalized * controller.minVelocity;
+            }
+            
         }
     }
 
@@ -78,5 +106,5 @@ public class Flock : MonoBehaviour
                 controller.separationWeight * separation +
                 controller.followWeight * follow +
                 controller.randomizeWeight * randomize);
-    }	
+    }
 }
